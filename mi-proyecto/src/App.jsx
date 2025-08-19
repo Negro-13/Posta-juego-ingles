@@ -50,8 +50,8 @@ export default function App() {
     </div>,
     <div>
       <p>While they ______ football, it started raining.</p>
-      <button onClick={() => playMiniGame(true)}>were playing</button>
       <button onClick={() => playMiniGame(false)}>played</button>
+      <button onClick={() => playMiniGame(true)}>were playing</button>
     </div>,
     <div>
       <p>I ______ dinner when the phone rang.</p>
@@ -60,8 +60,8 @@ export default function App() {
     </div>,
     <div>
       <p>He ______ to music while studying.</p>
-      <button onClick={() => playMiniGame(true)}>was listening</button>
       <button onClick={() => playMiniGame(false)}>listened</button>
+      <button onClick={() => playMiniGame(true)}>was listening</button>
     </div>,
     <div>
       <p>They ______ in the garden and ______ when it started to rain.</p>
@@ -70,8 +70,8 @@ export default function App() {
     </div>,
     <div>
       <p>She ______ when I arrived.</p>
-      <button onClick={() => playMiniGame(true)}>was sleeping</button>
       <button onClick={() => playMiniGame(false)}>slept</button>
+      <button onClick={() => playMiniGame(true)}>was sleeping</button>
     </div>,
     <div>
       <p>We ______ for the bus while it ______.</p>
@@ -80,8 +80,8 @@ export default function App() {
     </div>,
     <div>
       <p>He ______ in the park and ______ a bird.</p>
-      <button onClick={() => playMiniGame(true)}>was running / saw</button>
       <button onClick={() => playMiniGame(false)}>ran / was seeing</button>
+      <button onClick={() => playMiniGame(true)}>was running / saw</button>
     </div>,
     <div>
       <p>I ______ when she ______.</p>
@@ -90,8 +90,8 @@ export default function App() {
     </div>,
     <div>
       <p>They ______ quietly while the teacher ______.</p>
-      <button onClick={() => playMiniGame(true)}>were talking / was explaining</button>
       <button onClick={() => playMiniGame(false)}>talked / explained</button>
+      <button onClick={() => playMiniGame(true)}>were talking / was explaining</button>
     </div>,
     <div>
       <p>She ______ her homework when her brother ______ her.</p>
@@ -100,8 +100,8 @@ export default function App() {
     </div>,
     <div>
       <p>I ______ a book and ______ tea at the same time.</p>
-      <button onClick={() => playMiniGame(true)}>was reading / drinking</button>
       <button onClick={() => playMiniGame(false)}>read / drank</button>
+      <button onClick={() => playMiniGame(true)}>was reading / drinking</button>
     </div>,
     <div>
       <p>We ______ when the lights ______ off.</p>
@@ -110,8 +110,8 @@ export default function App() {
     </div>,
     <div>
       <p>He ______ while she ______.</p>
-      <button onClick={() => playMiniGame(true)}>was cooking / was setting the table</button>
       <button onClick={() => playMiniGame(false)}>cooked / set</button>
+      <button onClick={() => playMiniGame(true)}>was cooking / was setting the table</button>
     </div>,
     <div>
       <p>They ______ when I ______.</p>
@@ -120,8 +120,8 @@ export default function App() {
     </div>,
     <div>
       <p>She ______ the dishes while he ______ the floor.</p>
-      <button onClick={() => playMiniGame(true)}>was washing / was cleaning</button>
       <button onClick={() => playMiniGame(false)}>washed / cleaned</button>
+      <button onClick={() => playMiniGame(true)}>was washing / was cleaning</button>
     </div>,
     <div>
       <p>I ______ my room when it suddenly ______.</p>
@@ -153,7 +153,7 @@ export default function App() {
     </div>,
     <div>
       <p>She ______ a new dress last week.</p>
-      
+
       <button onClick={() => playMiniGame(false)}>buys</button>
       <button onClick={() => playMiniGame(true)}>bought</button>
     </div>,
