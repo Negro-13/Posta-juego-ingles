@@ -7,16 +7,16 @@ import player2 from "./assets/player2.png";
 export default function App() {
   const size = 5;
   const sPositions = [
-    [0,0],[0,1],[0,2],[0,3],[0,4],
-    [1,4],
-    [2,4],[2,3],[2,2],[2,1],[2,0],
-    [3,0],
-    [4,0],[4,1],[4,2],[4,3],[4,4]
+    [0, 0], [0, 1], [0, 2], [0, 3], [0, 4],
+    [1, 4],
+    [2, 4], [2, 3], [2, 2], [2, 1], [2, 0],
+    [3, 0],
+    [4, 0], [4, 1], [4, 2], [4, 3], [4, 4]
   ];
 
   const [player1Index, setPlayer1Index] = useState(0);
   const [player2Index, setPlayer2Index] = useState(0);
-  const [turn, setTurn] = useState(1); // 1 = Player1, 2 = Player2
+  const [turn, setTurn] = useState(1);
   const [dice, setDice] = useState(null);
   const [miniGame, setMiniGame] = useState(false);
   const [moveAfterMiniGame, setMoveAfterMiniGame] = useState(0);
@@ -29,8 +29,8 @@ export default function App() {
   }
 
   const playMiniGame = (won) => {
-    if(finalMiniGame){
-      if(won){
+    if (finalMiniGame) {
+      if (won) {
         alert(`Jugador ${turn} ganó el mini-juego final y es el ganador!`);
         resetGame();
       } else {
@@ -39,7 +39,7 @@ export default function App() {
         setFinalMiniGame(false);
       }
     } else {
-      if(won){
+      if (won) {
         alert(`Jugador ${turn} ganó el mini-juego y vuelve a tirar`);
       } else {
         alert(`Jugador ${turn} perdió el mini-juego`);
@@ -50,20 +50,19 @@ export default function App() {
   }
 
   const movePlayer = (steps) => {
-    if(turn === 1){
-      const newIndex = Math.min(player1Index + steps, sPositions.length -1);
+    if (turn === 1) {
+      const newIndex = Math.min(player1Index + steps, sPositions.length - 1);
       setPlayer1Index(newIndex);
-      if(newIndex === sPositions.length -1){
-        // Activar mini-juego final
+      if (newIndex === sPositions.length - 1) {
         setFinalMiniGame(true);
       } else {
         setMiniGame(true);
         setMoveAfterMiniGame(steps);
       }
     } else {
-      const newIndex = Math.min(player2Index + steps, sPositions.length -1);
+      const newIndex = Math.min(player2Index + steps, sPositions.length - 1);
       setPlayer2Index(newIndex);
-      if(newIndex === sPositions.length -1){
+      if (newIndex === sPositions.length - 1) {
         setFinalMiniGame(true);
       } else {
         setMiniGame(true);
@@ -87,29 +86,54 @@ export default function App() {
     const p1Pos = sPositions[player1Index];
     const p2Pos = sPositions[player2Index];
 
-    if(p1Pos[0] === row && p1Pos[1] === col &&
-       p2Pos[0] === row && p2Pos[1] === col){
+    if (p1Pos[0] === row && p1Pos[1] === col &&
+      p2Pos[0] === row && p2Pos[1] === col) {
       return <img src={juntos} alt="Juntos" className="piece" />;
     }
-    if(p1Pos[0] === row && p1Pos[1] === col){
+    if (p1Pos[0] === row && p1Pos[1] === col) {
       return <img src={player1} alt="Player 1" className="piece" />;
     }
-    if(p2Pos[0] === row && p2Pos[1] === col){
+    if (p2Pos[0] === row && p2Pos[1] === col) {
       return <img src={player2} alt="Player 2" className="piece" />;
     }
     return null;
   }
 
-  const miniGameUI = (
-    <div className="mini-game">
-      <p>{finalMiniGame ? "Mini-juego final: adivina un número del 1 al 3" : "Mini-juego: adivina un número del 1 al 3"}</p>
-      {[1,2,3].map(num => (
-        <button key={num} onClick={() => playMiniGame(Math.random() < 1/3 ? true : false)}>
-          {num}
-        </button>
-      ))}
+  // -------------------------
+  // 4 MINIJUEGOS PREPARADOS
+  // -------------------------
+  const MiniJuego1 = (
+  <div className="mini-game">
+    <p>Choose the correct option (Past Perfect):</p>
+    <p>By the time we arrived, she ______ the dinner.</p>
+    <button onClick={() => playMiniGame(true)}>had prepared</button>
+    <button onClick={() => playMiniGame(false)}>prepared</button>
+  </div>
+);
+
+  const MiniJuego2 = (
+    <div>
+      <p>Mini-juego 2</p>
     </div>
   );
+
+  const MiniJuego3 = (
+    <div>
+      <p>Mini-juego 3</p>
+    </div>
+  );
+
+  const MiniJuego4 = (
+    <div>
+      <p>Mini-juego 4</p>
+    </div>
+  );
+
+  const miniGameUI = (
+  <>
+    {MiniJuego1}
+  </>
+);
 
   return (
     <div className="container">
