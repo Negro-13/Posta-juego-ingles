@@ -153,8 +153,9 @@ export default function App() {
     </div>,
     <div>
       <p>She ______ a new dress last week.</p>
-      <button onClick={() => playMiniGame(true)}>bought</button>
+      
       <button onClick={() => playMiniGame(false)}>buys</button>
+      <button onClick={() => playMiniGame(true)}>bought</button>
     </div>,
     <div>
       <p>They ______ a great time at the party.</p>
@@ -163,8 +164,8 @@ export default function App() {
     </div>,
     <div>
       <p>He ______ his homework two hours ago.</p>
-      <button onClick={() => playMiniGame(true)}>finished</button>
       <button onClick={() => playMiniGame(false)}>finishes</button>
+      <button onClick={() => playMiniGame(true)}>finished</button>
     </div>,
     <div>
       <p>We ______ dinner at 8 pm and then ______ TV.</p>
@@ -173,8 +174,8 @@ export default function App() {
     </div>,
     <div>
       <p>She ______ the movie yesterday.</p>
-      <button onClick={() => playMiniGame(true)}>saw</button>
       <button onClick={() => playMiniGame(false)}>see</button>
+      <button onClick={() => playMiniGame(true)}>saw</button>
     </div>,
     <div>
       <p>I ______ a letter to my friend last night.</p>
@@ -183,8 +184,8 @@ export default function App() {
     </div>,
     <div>
       <p>They ______ soccer in the park last Saturday.</p>
-      <button onClick={() => playMiniGame(true)}>played</button>
       <button onClick={() => playMiniGame(false)}>play</button>
+      <button onClick={() => playMiniGame(true)}>played</button>
     </div>,
     <div>
       <p>He ______ the window and then ______ the lights off.</p>
@@ -193,8 +194,8 @@ export default function App() {
     </div>,
     <div>
       <p>We ______ breakfast and ______ to school.</p>
-      <button onClick={() => playMiniGame(true)}>ate / went</button>
       <button onClick={() => playMiniGame(false)}>eat / go</button>
+      <button onClick={() => playMiniGame(true)}>ate / went</button>
     </div>,
     <div>
       <p>She ______ very happy when she ______ her results.</p>
@@ -203,8 +204,8 @@ export default function App() {
     </div>,
     <div>
       <p>I ______ a long walk yesterday.</p>
-      <button onClick={() => playMiniGame(true)}>took</button>
       <button onClick={() => playMiniGame(false)}>take</button>
+      <button onClick={() => playMiniGame(true)}>took</button>
     </div>,
     <div>
       <p>He ______ breakfast and then ______ to work.</p>
@@ -213,8 +214,8 @@ export default function App() {
     </div>,
     <div>
       <p>They ______ a new car last month.</p>
-      <button onClick={() => playMiniGame(true)}>bought</button>
       <button onClick={() => playMiniGame(false)}>buy</button>
+      <button onClick={() => playMiniGame(true)}>bought</button>
     </div>,
     <div>
       <p>She ______ a letter and then ______ it to her friend.</p>
@@ -223,8 +224,8 @@ export default function App() {
     </div>,
     <div>
       <p>I ______ a book last weekend.</p>
-      <button onClick={() => playMiniGame(true)}>read</button>
       <button onClick={() => playMiniGame(false)}>reads</button>
+      <button onClick={() => playMiniGame(true)}>read</button>
     </div>,
     <div>
       <p>We ______ a new restaurant and ______ dinner there.</p>
@@ -233,8 +234,8 @@ export default function App() {
     </div>,
     <div>
       <p>He ______ a lot of questions and ______ the answers quickly.</p>
-      <button onClick={() => playMiniGame(true)}>asked / wrote</button>
       <button onClick={() => playMiniGame(false)}>ask / write</button>
+      <button onClick={() => playMiniGame(true)}>asked / wrote</button>
     </div>,
     <div>
       <p>She ______ a beautiful song yesterday.</p>
@@ -243,8 +244,8 @@ export default function App() {
     </div>,
     <div>
       <p>They ______ home and ______ TV all evening.</p>
-      <button onClick={() => playMiniGame(true)}>went / watched</button>
       <button onClick={() => playMiniGame(false)}>go / watch</button>
+      <button onClick={() => playMiniGame(true)}>went / watched</button>
     </div>,
   ];
 
