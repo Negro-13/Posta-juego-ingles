@@ -1,0 +1,92 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  font-family: sans-serif;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.board {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #333;
+  padding: 10px;
+}
+
+.row {
+  display: flex;
+}
+
+.tile {
+  width: 60px;
+  height: 60px;
+  margin: 2px;
+  position: relative;
+}
+
+.white {
+  background-color: white;
+}
+
+.black {
+  background-color: black;
+}
+
+.outside-label {
+  position: absolute;
+  font-size: 12px;
+  font-weight: bold;
+  color: red;
+}
+
+.outside-label.top {
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.outside-label.bottom {
+  bottom: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.interface {
+  width: 50%;
+  background-color: #f0f0f0;
+  padding: 20px;
+  color: black; /* Cambié el color del texto a negro */
+}
+.piece {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+.interface button {
+  padding: 10px 20px;
+  font-size: 16px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.mini-game {
+  margin-top: 10px;
+}
+
+.mini-game button {
+  margin: 5px;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+}
