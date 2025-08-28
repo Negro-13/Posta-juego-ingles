@@ -22,10 +22,12 @@ export default function App() {
   const [finalMiniGame, setFinalMiniGame] = useState(false);
   const [currentMiniGame, setCurrentMiniGame] = useState(null);
   const [finalAnswers, setFinalAnswers] = useState([null, null, null]);
+  const [lastMove, setLastMove] = useState(0); // 👈 guardamos el último avance
 
   const rollDice = () => {
     const roll = Math.floor(Math.random() * 6) + 1;
     setDice(roll);
+    setLastMove(roll); // guardamos la tirada
     movePlayer(roll);
   };
 
@@ -33,7 +35,12 @@ export default function App() {
     if (won) {
       alert(`Player ${turn} won the mini-game!`);
     } else {
-      alert(`Player ${turn} lost the mini-game.`);
+      alert(`Player ${turn} lost the mini-game and goes back ${lastMove} steps!`);
+      if (turn === 1) {
+        setPlayer1Index((prev) => Math.max(prev - lastMove, 0));
+      } else {
+        setPlayer2Index((prev) => Math.max(prev - lastMove, 0));
+      }
       setTurn(turn === 1 ? 2 : 1);
     }
     setMiniGame(false);
@@ -45,103 +52,103 @@ export default function App() {
   const pastContinuousGames = [
     <div>
       <p>She ______ TV when I called her.</p>
-      <button onClick={() => playMiniGame(true)}>was watching</button>
       <button onClick={() => playMiniGame(false)}>watched</button>
+      <button onClick={() => playMiniGame(true)}>was watching</button>
     </div>,
     <div>
       <p>While they ______ football, it started raining.</p>
+      <button onClick={() => playMiniGame(true)}>were playing</button>
+      <button onClick={() => playMiniGame(false)}>played</button>
+    </div>,
+    <div>
+      <p>I ______ dinner when the phone rang.</p>
+      <button onClick={() => playMiniGame(false)}>cooked</button>
+      <button onClick={() => playMiniGame(true)}>was cooking</button>
+    </div>,
+    <div>
+      <p>He ______ to music while studying.</p>
+      <button onClick={() => playMiniGame(true)}>was listening</button>
+      <button onClick={() => playMiniGame(false)}>listened</button>
+    </div>,
+    <div>
+      <p>They ______ in the garden and ______ when it started to rain.</p>
+      <button onClick={() => playMiniGame(false)}>played / chatted</button>
+      <button onClick={() => playMiniGame(true)}>were playing / chatting</button>
+    </div>,
+    <div>
+      <p>She ______ when I arrived.</p>
+      <button onClick={() => playMiniGame(true)}>was sleeping</button>
+      <button onClick={() => playMiniGame(false)}>slept</button>
+    </div>,
+    <div>
+      <p>We ______ for the bus while it ______.</p>
+      <button onClick={() => playMiniGame(false)}>waited / was raining</button>
+      <button onClick={() => playMiniGame(true)}>were waiting / rained</button>
+    </div>,
+    <div>
+      <p>He ______ in the park and ______ a bird.</p>
+      <button onClick={() => playMiniGame(true)}>was running / saw</button>
+      <button onClick={() => playMiniGame(false)}>ran / was seeing</button>
+    </div>,
+    <div>
+      <p>I ______ when she ______.</p>
+      <button onClick={() => playMiniGame(false)}>read / was arriving</button>
+      <button onClick={() => playMiniGame(true)}>was reading / arrived</button>
+    </div>,
+    <div>
+      <p>They ______ quietly while the teacher ______.</p>
+      <button onClick={() => playMiniGame(true)}>were talking / was explaining</button>
+      <button onClick={() => playMiniGame(false)}>talked / explained</button>
+    </div>,
+    <div>
+      <p>We ______ to music while cooking.</p>
+      <button onClick={() => playMiniGame(false)}>listened</button>
+      <button onClick={() => playMiniGame(true)}>were listening</button>
+    </div>,
+    <div>
+      <p>She ______ a book when I entered.</p>
+      <button onClick={() => playMiniGame(true)}>was reading</button>
+      <button onClick={() => playMiniGame(false)}>read</button>
+    </div>,
+    <div>
+      <p>They ______ chess all afternoon.</p>
       <button onClick={() => playMiniGame(false)}>played</button>
       <button onClick={() => playMiniGame(true)}>were playing</button>
     </div>,
     <div>
-      <p>I ______ dinner when the phone rang.</p>
-      <button onClick={() => playMiniGame(true)}>was cooking</button>
-      <button onClick={() => playMiniGame(false)}>cooked</button>
+      <p>I ______ when he knocked on the door.</p>
+      <button onClick={() => playMiniGame(true)}>was studying</button>
+      <button onClick={() => playMiniGame(false)}>studied</button>
     </div>,
     <div>
-      <p>He ______ to music while studying.</p>
-      <button onClick={() => playMiniGame(false)}>listened</button>
-      <button onClick={() => playMiniGame(true)}>was listening</button>
+      <p>She ______ coffee when I called.</p>
+      <button onClick={() => playMiniGame(false)}>made</button>
+      <button onClick={() => playMiniGame(true)}>was making</button>
     </div>,
     <div>
-      <p>They ______ in the garden and ______ when it started to rain.</p>
-      <button onClick={() => playMiniGame(true)}>were playing / chatting</button>
-      <button onClick={() => playMiniGame(false)}>played / chatted</button>
+      <p>We ______ in the park yesterday at 5.</p>
+      <button onClick={() => playMiniGame(true)}>were walking</button>
+      <button onClick={() => playMiniGame(false)}>walked</button>
     </div>,
     <div>
-      <p>She ______ when I arrived.</p>
+      <p>He ______ when the alarm rang.</p>
       <button onClick={() => playMiniGame(false)}>slept</button>
       <button onClick={() => playMiniGame(true)}>was sleeping</button>
     </div>,
     <div>
-      <p>We ______ for the bus while it ______.</p>
-      <button onClick={() => playMiniGame(true)}>were waiting / rained</button>
-      <button onClick={() => playMiniGame(false)}>waited / was raining</button>
+      <p>They ______ TV while eating.</p>
+      <button onClick={() => playMiniGame(true)}>were watching</button>
+      <button onClick={() => playMiniGame(false)}>watched</button>
     </div>,
     <div>
-      <p>He ______ in the park and ______ a bird.</p>
-      <button onClick={() => playMiniGame(false)}>ran / was seeing</button>
-      <button onClick={() => playMiniGame(true)}>was running / saw</button>
+      <p>I ______ the guitar when you arrived.</p>
+      <button onClick={() => playMiniGame(false)}>played</button>
+      <button onClick={() => playMiniGame(true)}>was playing</button>
     </div>,
     <div>
-      <p>I ______ when she ______.</p>
-      <button onClick={() => playMiniGame(true)}>was reading / arrived</button>
-      <button onClick={() => playMiniGame(false)}>read / was arriving</button>
-    </div>,
-    <div>
-      <p>They ______ quietly while the teacher ______.</p>
-      <button onClick={() => playMiniGame(false)}>talked / explained</button>
-      <button onClick={() => playMiniGame(true)}>were talking / was explaining</button>
-    </div>,
-    <div>
-      <p>She ______ her homework when her brother ______ her.</p>
-      <button onClick={() => playMiniGame(true)}>was doing / interrupted</button>
-      <button onClick={() => playMiniGame(false)}>did / was interrupting</button>
-    </div>,
-    <div>
-      <p>I ______ a book and ______ tea at the same time.</p>
-      <button onClick={() => playMiniGame(false)}>read / drank</button>
-      <button onClick={() => playMiniGame(true)}>was reading / drinking</button>
-    </div>,
-    <div>
-      <p>We ______ when the lights ______ off.</p>
-      <button onClick={() => playMiniGame(true)}>were sleeping / went</button>
-      <button onClick={() => playMiniGame(false)}>slept / went off</button>
-    </div>,
-    <div>
-      <p>He ______ while she ______.</p>
-      <button onClick={() => playMiniGame(false)}>cooked / set</button>
-      <button onClick={() => playMiniGame(true)}>was cooking / was setting the table</button>
-    </div>,
-    <div>
-      <p>They ______ when I ______.</p>
-      <button onClick={() => playMiniGame(true)}>were walking / called</button>
-      <button onClick={() => playMiniGame(false)}>walked / was calling</button>
-    </div>,
-    <div>
-      <p>She ______ the dishes while he ______ the floor.</p>
-      <button onClick={() => playMiniGame(false)}>washed / cleaned</button>
-      <button onClick={() => playMiniGame(true)}>was washing / was cleaning</button>
-    </div>,
-    <div>
-      <p>I ______ my room when it suddenly ______.</p>
-      <button onClick={() => playMiniGame(true)}>was tidying / started raining</button>
-      <button onClick={() => playMiniGame(false)}>tidied / was starting raining</button>
-    </div>,
-    <div>
-      <p>He ______ for his exam while she ______ TV.</p>
-      <button onClick={() => playMiniGame(true)}>was studying / was watching</button>
-      <button onClick={() => playMiniGame(false)}>studied / watched</button>
-    </div>,
-    <div>
-      <p>They ______ in the pool and ______ when it began to storm.</p>
-      <button onClick={() => playMiniGame(true)}>were swimming / laughing</button>
-      <button onClick={() => playMiniGame(false)}>swam / were laughing</button>
-    </div>,
-    <div>
-      <p>She ______ while I ______ the table.</p>
-      <button onClick={() => playMiniGame(true)}>was reading / was setting</button>
-      <button onClick={() => playMiniGame(false)}>read / set</button>
+      <p>We ______ to school when it started raining.</p>
+      <button onClick={() => playMiniGame(true)}>were going</button>
+      <button onClick={() => playMiniGame(false)}>went</button>
     </div>,
   ];
 
@@ -153,7 +160,6 @@ export default function App() {
     </div>,
     <div>
       <p>She ______ a new dress last week.</p>
-
       <button onClick={() => playMiniGame(false)}>buys</button>
       <button onClick={() => playMiniGame(true)}>bought</button>
     </div>,
@@ -163,196 +169,194 @@ export default function App() {
       <button onClick={() => playMiniGame(false)}>have</button>
     </div>,
     <div>
-      <p>He ______ his homework two hours ago.</p>
-      <button onClick={() => playMiniGame(false)}>finishes</button>
-      <button onClick={() => playMiniGame(true)}>finished</button>
+      <p>He ______ football with his friends yesterday.</p>
+      <button onClick={() => playMiniGame(false)}>plays</button>
+      <button onClick={() => playMiniGame(true)}>played</button>
     </div>,
     <div>
-      <p>We ______ dinner at 8 pm and then ______ TV.</p>
-      <button onClick={() => playMiniGame(true)}>ate / watched</button>
-      <button onClick={() => playMiniGame(false)}>eat / watch</button>
+      <p>We ______ a delicious cake.</p>
+      <button onClick={() => playMiniGame(true)}>ate</button>
+      <button onClick={() => playMiniGame(false)}>eat</button>
     </div>,
     <div>
-      <p>She ______ the movie yesterday.</p>
-      <button onClick={() => playMiniGame(false)}>see</button>
-      <button onClick={() => playMiniGame(true)}>saw</button>
+      <p>I ______ my homework last night.</p>
+      <button onClick={() => playMiniGame(false)}>do</button>
+      <button onClick={() => playMiniGame(true)}>did</button>
     </div>,
     <div>
-      <p>I ______ a letter to my friend last night.</p>
+      <p>She ______ a letter to her friend.</p>
       <button onClick={() => playMiniGame(true)}>wrote</button>
       <button onClick={() => playMiniGame(false)}>write</button>
     </div>,
     <div>
-      <p>They ______ soccer in the park last Saturday.</p>
+      <p>They ______ to the cinema on Friday.</p>
+      <button onClick={() => playMiniGame(false)}>go</button>
+      <button onClick={() => playMiniGame(true)}>went</button>
+    </div>,
+    <div>
+      <p>He ______ a bike to school.</p>
+      <button onClick={() => playMiniGame(true)}>rode</button>
+      <button onClick={() => playMiniGame(false)}>ride</button>
+    </div>,
+    <div>
+      <p>We ______ a movie last weekend.</p>
+      <button onClick={() => playMiniGame(false)}>see</button>
+      <button onClick={() => playMiniGame(true)}>saw</button>
+    </div>,
+    <div>
+      <p>I ______ my grandparents yesterday.</p>
+      <button onClick={() => playMiniGame(true)}>visited</button>
+      <button onClick={() => playMiniGame(false)}>visit</button>
+    </div>,
+    <div>
+      <p>She ______ happy when she got the gift.</p>
+      <button onClick={() => playMiniGame(false)}>is</button>
+      <button onClick={() => playMiniGame(true)}>was</button>
+    </div>,
+    <div>
+      <p>They ______ late to the meeting.</p>
+      <button onClick={() => playMiniGame(true)}>arrived</button>
+      <button onClick={() => playMiniGame(false)}>arrive</button>
+    </div>,
+    <div>
+      <p>He ______ football yesterday.</p>
       <button onClick={() => playMiniGame(false)}>play</button>
       <button onClick={() => playMiniGame(true)}>played</button>
     </div>,
     <div>
-      <p>He ______ the window and then ______ the lights off.</p>
-      <button onClick={() => playMiniGame(true)}>opened / turned</button>
-      <button onClick={() => playMiniGame(false)}>opens / turn</button>
-    </div>,
-    <div>
-      <p>We ______ breakfast and ______ to school.</p>
-      <button onClick={() => playMiniGame(false)}>eat / go</button>
-      <button onClick={() => playMiniGame(true)}>ate / went</button>
-    </div>,
-    <div>
-      <p>She ______ very happy when she ______ her results.</p>
-      <button onClick={() => playMiniGame(true)}>was / saw</button>
-      <button onClick={() => playMiniGame(false)}>is / sees</button>
-    </div>,
-    <div>
-      <p>I ______ a long walk yesterday.</p>
-      <button onClick={() => playMiniGame(false)}>take</button>
+      <p>We ______ a photo together.</p>
       <button onClick={() => playMiniGame(true)}>took</button>
+      <button onClick={() => playMiniGame(false)}>take</button>
     </div>,
     <div>
-      <p>He ______ breakfast and then ______ to work.</p>
-      <button onClick={() => playMiniGame(true)}>ate / went</button>
-      <button onClick={() => playMiniGame(false)}>eats / goes</button>
-    </div>,
-    <div>
-      <p>They ______ a new car last month.</p>
-      <button onClick={() => playMiniGame(false)}>buy</button>
-      <button onClick={() => playMiniGame(true)}>bought</button>
-    </div>,
-    <div>
-      <p>She ______ a letter and then ______ it to her friend.</p>
-      <button onClick={() => playMiniGame(true)}>wrote / sent</button>
-      <button onClick={() => playMiniGame(false)}>writes / send</button>
-    </div>,
-    <div>
-      <p>I ______ a book last weekend.</p>
-      <button onClick={() => playMiniGame(false)}>reads</button>
-      <button onClick={() => playMiniGame(true)}>read</button>
-    </div>,
-    <div>
-      <p>We ______ a new restaurant and ______ dinner there.</p>
-      <button onClick={() => playMiniGame(true)}>found / had</button>
-      <button onClick={() => playMiniGame(false)}>find / have</button>
-    </div>,
-    <div>
-      <p>He ______ a lot of questions and ______ the answers quickly.</p>
-      <button onClick={() => playMiniGame(false)}>ask / write</button>
-      <button onClick={() => playMiniGame(true)}>asked / wrote</button>
-    </div>,
-    <div>
-      <p>She ______ a beautiful song yesterday.</p>
-      <button onClick={() => playMiniGame(true)}>sang</button>
+      <p>I ______ a song.</p>
       <button onClick={() => playMiniGame(false)}>sing</button>
+      <button onClick={() => playMiniGame(true)}>sang</button>
     </div>,
     <div>
-      <p>They ______ home and ______ TV all evening.</p>
-      <button onClick={() => playMiniGame(false)}>go / watch</button>
-      <button onClick={() => playMiniGame(true)}>went / watched</button>
+      <p>She ______ her keys.</p>
+      <button onClick={() => playMiniGame(true)}>lost</button>
+      <button onClick={() => playMiniGame(false)}>lose</button>
+    </div>,
+    <div>
+      <p>They ______ English in school.</p>
+      <button onClick={() => playMiniGame(false)}>learn</button>
+      <button onClick={() => playMiniGame(true)}>learned</button>
+    </div>,
+    <div>
+      <p>He ______ a letter yesterday.</p>
+      <button onClick={() => playMiniGame(true)}>sent</button>
+      <button onClick={() => playMiniGame(false)}>send</button>
+    </div>,
+    <div>
+      <p>We ______ our friends at the park.</p>
+      <button onClick={() => playMiniGame(false)}>meet</button>
+      <button onClick={() => playMiniGame(true)}>met</button>
     </div>,
   ];
-
 
   const usedToGames = [
     <div>
-      <p>I ______ play basketball when I was a kid.</p>
+      <p>I ______ play outside every day when I was a child.</p>
       <button onClick={() => playMiniGame(true)}>used to</button>
       <button onClick={() => playMiniGame(false)}>use to</button>
     </div>,
     <div>
-      <p>She ______ eat chocolate every day.</p>
+      <p>She ______ eat a lot of sweets, but now she doesn’t.</p>
+      <button onClick={() => playMiniGame(false)}>use to</button>
       <button onClick={() => playMiniGame(true)}>used to</button>
-      <button onClick={() => playMiniGame(false)}>use</button>
     </div>,
     <div>
-      <p>They ______ go to the park on Sundays.</p>
+      <p>They ______ live in London before moving here.</p>
       <button onClick={() => playMiniGame(true)}>used to</button>
       <button onClick={() => playMiniGame(false)}>use to</button>
     </div>,
     <div>
-      <p>He ______ have long hair when he was younger.</p>
-      <button onClick={() => playMiniGame(true)}>used to</button>
-      <button onClick={() => playMiniGame(false)}>uses to</button>
+      <p>He didn’t ______ like vegetables.</p>
+      <button onClick={() => playMiniGame(false)}>used to</button>
+      <button onClick={() => playMiniGame(true)}>use to</button>
     </div>,
     <div>
-      <p>We ______ visit our grandparents every summer and ______ many games together.</p>
-      <button onClick={() => playMiniGame(true)}>used to / played</button>
-      <button onClick={() => playMiniGame(false)}>use to / play</button>
-    </div>,
-    <div>
-      <p>She ______ live in Paris before moving to London.</p>
+      <p>We ______ go to the beach every summer.</p>
       <button onClick={() => playMiniGame(true)}>used to</button>
       <button onClick={() => playMiniGame(false)}>use to</button>
     </div>,
     <div>
-      <p>I ______ read a lot of comics when I was a child.</p>
-      <button onClick={() => playMiniGame(true)}>used to</button>
-      <button onClick={() => playMiniGame(false)}>use</button>
+      <p>Did you ______ play the guitar?</p>
+      <button onClick={() => playMiniGame(false)}>used to</button>
+      <button onClick={() => playMiniGame(true)}>use to</button>
     </div>,
     <div>
-      <p>They ______ go swimming in the summer.</p>
-      <button onClick={() => playMiniGame(true)}>used to</button>
-      <button onClick={() => playMiniGame(false)}>use to</button>
-    </div>,
-    <div>
-      <p>He ______ smoke but he stopped last year.</p>
-      <button onClick={() => playMiniGame(true)}>used to</button>
-      <button onClick={() => playMiniGame(false)}>use</button>
-    </div>,
-    <div>
-      <p>We ______ play outside after school and ______ hide-and-seek.</p>
-      <button onClick={() => playMiniGame(true)}>used to / played</button>
-      <button onClick={() => playMiniGame(false)}>use to / play</button>
-    </div>,
-    <div>
-      <p>She ______ go to the library every Friday.</p>
+      <p>I ______ watch cartoons after school.</p>
       <button onClick={() => playMiniGame(true)}>used to</button>
       <button onClick={() => playMiniGame(false)}>use to</button>
     </div>,
     <div>
-      <p>I ______ have a cat and a dog when I was younger.</p>
-      <button onClick={() => playMiniGame(true)}>used to</button>
-      <button onClick={() => playMiniGame(false)}>use</button>
+      <p>She didn’t ______ like spicy food.</p>
+      <button onClick={() => playMiniGame(true)}>use to</button>
+      <button onClick={() => playMiniGame(false)}>used to</button>
     </div>,
     <div>
-      <p>They ______ visit museums on holidays.</p>
+      <p>They ______ travel a lot when they were young.</p>
+      <button onClick={() => playMiniGame(false)}>use to</button>
+      <button onClick={() => playMiniGame(true)}>used to</button>
+    </div>,
+    <div>
+      <p>We ______ visit our grandparents every weekend.</p>
       <button onClick={() => playMiniGame(true)}>used to</button>
       <button onClick={() => playMiniGame(false)}>use to</button>
     </div>,
     <div>
-      <p>He ______ eat ice cream every day during summer.</p>
-      <button onClick={() => playMiniGame(true)}>used to</button>
-      <button onClick={() => playMiniGame(false)}>use</button>
+      <p>He didn’t ______ play football.</p>
+      <button onClick={() => playMiniGame(false)}>used to</button>
+      <button onClick={() => playMiniGame(true)}>use to</button>
     </div>,
     <div>
-      <p>We ______ play chess in the evenings and ______ cards.</p>
-      <button onClick={() => playMiniGame(true)}>used to / played</button>
-      <button onClick={() => playMiniGame(false)}>use to / play</button>
-    </div>,
-    <div>
-      <p>She ______ listen to pop music all the time.</p>
-      <button onClick={() => playMiniGame(true)}>used to</button>
-      <button onClick={() => playMiniGame(false)}>use</button>
-    </div>,
-    <div>
-      <p>I ______ go to bed early and ______ up at 6 am.</p>
-      <button onClick={() => playMiniGame(true)}>used to / wake</button>
-      <button onClick={() => playMiniGame(false)}>use to / wakes</button>
-    </div>,
-    <div>
-      <p>They ______ go hiking on weekends.</p>
+      <p>I ______ have long hair when I was a kid.</p>
       <button onClick={() => playMiniGame(true)}>used to</button>
       <button onClick={() => playMiniGame(false)}>use to</button>
     </div>,
     <div>
-      <p>He ______ play video games every evening before dinner.</p>
-      <button onClick={() => playMiniGame(true)}>used to</button>
-      <button onClick={() => playMiniGame(false)}>use</button>
+      <p>Did she ______ sing in a choir?</p>
+      <button onClick={() => playMiniGame(false)}>used to</button>
+      <button onClick={() => playMiniGame(true)}>use to</button>
     </div>,
     <div>
-      <p>We ______ ride our bikes and ______ explore the neighborhood.</p>
-      <button onClick={() => playMiniGame(true)}>used to / would</button>
-      <button onClick={() => playMiniGame(false)}>use to / will</button>
+      <p>They ______ play chess together.</p>
+      <button onClick={() => playMiniGame(true)}>used to</button>
+      <button onClick={() => playMiniGame(false)}>use to</button>
+    </div>,
+    <div>
+      <p>We didn’t ______ have a TV.</p>
+      <button onClick={() => playMiniGame(true)}>use to</button>
+      <button onClick={() => playMiniGame(false)}>used to</button>
+    </div>,
+    <div>
+      <p>I ______ drink milk before bed.</p>
+      <button onClick={() => playMiniGame(false)}>use to</button>
+      <button onClick={() => playMiniGame(true)}>used to</button>
+    </div>,
+    <div>
+      <p>She didn’t ______ like coffee.</p>
+      <button onClick={() => playMiniGame(true)}>use to</button>
+      <button onClick={() => playMiniGame(false)}>used to</button>
+    </div>,
+    <div>
+      <p>They ______ go camping in the mountains.</p>
+      <button onClick={() => playMiniGame(true)}>used to</button>
+      <button onClick={() => playMiniGame(false)}>use to</button>
+    </div>,
+    <div>
+      <p>Did you ______ play with dolls?</p>
+      <button onClick={() => playMiniGame(false)}>used to</button>
+      <button onClick={() => playMiniGame(true)}>use to</button>
+    </div>,
+    <div>
+      <p>We ______ walk to school every day.</p>
+      <button onClick={() => playMiniGame(true)}>used to</button>
+      <button onClick={() => playMiniGame(false)}>use to</button>
     </div>,
   ];
-
 
   const gameThemes = [pastContinuousGames, pastSimpleGames, usedToGames];
 
@@ -467,11 +471,22 @@ export default function App() {
     updated[blankIndex] = valueIndex;
     setFinalAnswers(updated);
 
-    if (updated.every((ans, i) => ans === currentMiniGame.correct[i])) {
+    const allAnswered = updated.every(ans => ans !== null);
+    const allCorrect = updated.every((ans, i) => ans === currentMiniGame.correct[i]);
+
+    if (allCorrect) {
       alert(`Player ${turn} completed the final sentence correctly and won!`);
       resetGame();
-    } else if (updated.every(ans => ans !== null)) {
-      alert(`Player ${turn} made a mistake. Turn goes to the other player.`);
+    } else if (allAnswered && !allCorrect) {
+      alert(`Player ${turn} made a mistake. Turn goes to the other player and moves back!`);
+
+      // Retrocede la cantidad de casillas que avanzó con el dado
+      if (turn === 1) {
+        setPlayer1Index(prev => Math.max(prev - lastMove, 0));
+      } else {
+        setPlayer2Index(prev => Math.max(prev - lastMove, 0));
+      }
+
       setTurn(turn === 1 ? 2 : 1);
       setFinalMiniGame(false);
       setFinalAnswers([null, null, null]);
@@ -479,6 +494,10 @@ export default function App() {
   };
 
 
+
+  // -------------------------
+  // FUNCIONES DE MOVIMIENTO
+  // -------------------------
   const movePlayer = (steps) => {
     if (turn === 1) {
       const newIndex = Math.min(player1Index + steps, sPositions.length - 1);
@@ -512,7 +531,10 @@ export default function App() {
     setFinalMiniGame(false);
     setCurrentMiniGame(null);
     setFinalAnswers([null, null, null]);
+    setLastMove(0);
   };
+
+
 
   const isWhite = (row, col) => sPositions.some(([r, c]) => r === row && c === col);
 
