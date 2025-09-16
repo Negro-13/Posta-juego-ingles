@@ -53,8 +53,8 @@ export default function Game() {
         } else {
             if (errorAudioRef.current) errorAudioRef.current.play();
             alert(`Player ${turn} lost the mini-game! Turn goes to the other player.`);
-            setTurn(turn === 1 ? 2 : 1);
         }
+        setTurn(turn === 1 ? 2 : 1); // 👈 Siempre cambia el turno
         setMiniGame(false);
     };
 
