@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "../App.css";
 import juntos from "../assets/juntos.png";
 import player1 from "../assets/player1.png";
 import player2 from "../assets/player2.png";
 import music from "../assets/music.mp3";
 import error from "../assets/error.mp3";
+import bien from "../assets/bien.mp3";
 
 export default function Game() {
     const size = 7; // Tablero de 7x7
@@ -35,6 +36,8 @@ export default function Game() {
     const [currentMiniGame, setCurrentMiniGame] = useState(null);
     const [finalAnswers, setFinalAnswers] = useState([null, null, null]);
     const [lastMove, setLastMove] = useState(0); // 👈 guardamos el último avance
+    const errorAudioRef = useRef(null);
+    const bienAudioRef = useRef(null);
 
     const rollDice = () => {
         const roll = Math.floor(Math.random() * 6) + 1;
@@ -45,14 +48,11 @@ export default function Game() {
 
     const playMiniGame = (won) => {
         if (won) {
+            if (bienAudioRef.current) bienAudioRef.current.play();
             alert(`Player ${turn} won the mini-game!`);
         } else {
-            alert(`Player ${turn} lost the mini-game and goes back ${lastMove} steps!`);
-            if (turn === 1) {
-                setPlayer1Index((prev) => Math.max(prev - lastMove, 0));
-            } else {
-                setPlayer2Index((prev) => Math.max(prev - lastMove, 0));
-            }
+            if (errorAudioRef.current) errorAudioRef.current.play();
+            alert(`Player ${turn} lost the mini-game! Turn goes to the other player.`);
             setTurn(turn === 1 ? 2 : 1);
         }
         setMiniGame(false);
@@ -550,18 +550,12 @@ export default function Game() {
         const allCorrect = updated.every((ans, i) => ans === currentMiniGame.correct[i]);
 
         if (allCorrect) {
+            if (bienAudioRef.current) bienAudioRef.current.play();
             alert(`Player ${turn} completed the final sentence correctly and won!`);
             resetGame();
         } else if (allAnswered && !allCorrect) {
-            alert(`Player ${turn} made a mistake. Turn goes to the other player and moves back!`);
-
-            // Retrocede la cantidad de casillas que avanzó con el dado
-            if (turn === 1) {
-                setPlayer1Index(prev => Math.max(prev - lastMove, 0));
-            } else {
-                setPlayer2Index(prev => Math.max(prev - lastMove, 0));
-            }
-
+            if (errorAudioRef.current) errorAudioRef.current.play();
+            alert(`Player ${turn} made a mistake. Turn goes to the other player!`);
             setTurn(turn === 1 ? 2 : 1);
             setFinalMiniGame(false);
             setFinalAnswers([null, null, null]);
@@ -584,7 +578,7 @@ export default function Game() {
                 setFinalMiniGame(false);
                 setCurrentMiniGame(null);
                 setFinalAnswers([null, null, null]);
-                setLastMove(0);
+                // NO poner setLastMove(0) aquí
                 alert("¡Caíste en una casilla especial! Vuelves al inicio y el turno pasa al siguiente jugador.");
                 return;
             }
@@ -606,7 +600,7 @@ export default function Game() {
                 setFinalMiniGame(false);
                 setCurrentMiniGame(null);
                 setFinalAnswers([null, null, null]);
-                setLastMove(0);
+                // NO poner setLastMove(0) aquí
                 alert("¡Caíste en una casilla especial! Vuelves al inicio y el turno pasa al siguiente jugador.");
                 return;
             }
@@ -682,6 +676,8 @@ export default function Game() {
     return (
         <div className="container">
             <audio src={music} autoPlay loop />
+            <audio src={error} ref={errorAudioRef} />
+            <audio src={bien} ref={bienAudioRef} />
             <div className="board">
                 {Array.from({ length: size }).map((_, row) => (
                     <div key={row} className="row">
