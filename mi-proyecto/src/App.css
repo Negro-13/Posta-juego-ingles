@@ -47,7 +47,9 @@ html, body, #root {
 .black {
   background-color: transparent;
 }
-
+.tile.red {
+    background-color: red;
+}
 .outside-label {
   position: absolute;
   font-size: 12px;
